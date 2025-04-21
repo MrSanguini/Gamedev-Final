@@ -1,0 +1,60 @@
+extends State
+# Action states are: Standing/Walking/Running/Jumping/Falling/Landing/Wall riding/Floating/Dashing
+
+@export
+var walking_state: State
+@export
+var running_state: State
+@export
+var standing_state: State
+@export
+var falling_state: State
+@export
+var floating_state: State
+@export
+var dashing_state: State
+@export
+var wall_sticking_state: State
+@export
+var dead_state: State
+@export
+var wall_stick_time: float = 0.3
+var wall_stick_timer: float = wall_stick_time
+
+func enter() -> void:
+	super()
+	set_collision(1, 18, 0, 0.5, 1.5)
+	parent.jumps_remaining -= 1
+	parent.velocity.y = parent.jump_velocity
+
+func process_input(event: InputEvent) -> State:
+	if get_dash() and parent.can_dash:
+		return dashing_state
+	return null
+	
+func process_physics(delta: float) -> State:
+	super(delta)
+	# Float if upward velocity reaches zero, fall if it goes below zero
+	if parent.velocity.y == 0:
+		return floating_state
+	if parent.velocity.y > 0:
+		return falling_state
+		
+	# Stick to walls if jump is held whilst moving into them
+	if parent.is_on_wall_only() and (parent.turn == get_movement_input()):
+		if get_jump_hold():
+			wall_stick_timer -= delta
+			if wall_stick_timer <= 0:
+				return wall_sticking_state
+		else:
+			wall_stick_timer = wall_stick_time
+	return null
+
+func exit() -> void:
+	pass
+
+func process_frame(delta: float) -> State:
+	#If dead, die
+	if !parent.is_alive:
+		return dead_state
+	return null
