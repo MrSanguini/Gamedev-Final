@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://dgtllh0ivwpu3"]
+
+[ext_resource type="Texture2D" uid="uid://bcf2ntawmpnrb" path="res://scenes/ui/kenney_ui-pack-rpg-expansion/PNG/barGreen_horizontalMid.png" id="1_0clki"]
+[ext_resource type="Theme" uid="uid://5c0frflud0pu" path="res://scenes/ui/new_theme.tres" id="1_ledv5"]
+[ext_resource type="Texture2D" uid="uid://d0xf50aqkga8d" path="res://scenes/ui/kenney_ui-pack-rpg-expansion/PNG/barBlue_horizontalBlue.png" id="2_lshwv"]
+[ext_resource type="Texture2D" uid="uid://rvtu6sjq3fas" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0047.png" id="2_m5lkp"]
+[ext_resource type="Texture2D" uid="uid://dbo010qdstwie" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0046.png" id="2_p77em"]
+[ext_resource type="Texture2D" uid="uid://b842r0ec3ujj8" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0059.png" id="3_p77em"]
+[ext_resource type="Texture2D" uid="uid://cp5brxf8hsm43" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0060.png" id="4_0l6b2"]
+[ext_resource type="Texture2D" uid="uid://vwg0kvbpysx5" path="res://scenes/ui/Sprite-0001.png" id="7_0clki"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bgv18"]
+texture = ExtResource("1_0clki")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1ndf"]
+texture = ExtResource("2_lshwv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0l6b2"]
+texture = ExtResource("2_p77em")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p4itg"]
+texture = ExtResource("2_m5lkp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0clki"]
+texture = ExtResource("3_p77em")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lshwv"]
+texture = ExtResource("4_0l6b2")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 72.0
+offset_top = 20.0
+offset_right = 331.552
+offset_bottom = 45.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_bgv18")
+value = 85.0
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 74.0
+offset_top = 47.0
+offset_right = 229.0
+offset_bottom = 56.0
+theme_override_styles/fill = SubResource("StyleBoxTexture_h1ndf")
+value = 85.0
+show_percentage = false
+
+[node name="Panel" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 38.0
+offset_bottom = 41.0
+theme = ExtResource("1_ledv5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0l6b2")
+metadata/_edit_group_ = true
+
+[node name="Panel2" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_top = 1.0
+offset_right = 78.0
+offset_bottom = 41.0
+theme = ExtResource("1_ledv5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_p4itg")
+metadata/_edit_group_ = true
+
+[node name="Panel3" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = 41.0
+offset_right = 38.0
+offset_bottom = 81.0
+theme = ExtResource("1_ledv5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0clki")
+metadata/_edit_group_ = true
+
+[node name="Panel4" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_top = 41.0
+offset_right = 78.0
+offset_bottom = 81.0
+theme = ExtResource("1_ledv5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_lshwv")
+metadata/_edit_group_ = true
+
+[node name="Sprite-0001" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(38, 40)
+scale = Vector2(3, 3)
+texture = ExtResource("7_0clki")

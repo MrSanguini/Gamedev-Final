@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://40xgpejws2qs"]
+
+[ext_resource type="Script" path="res://Scripts/hazard.gd" id="1_kq4vn"]
+[ext_resource type="Texture2D" uid="uid://bntkkijb7vs21" path="res://Sprites/Wood-Camp/Tiles/Assets.png" id="2_3f8cp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7n2u"]
+size = Vector2(31, 18.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_alwkp"]
+size = Vector2(31, 46)
+
+[node name="sharpHazard" type="Node2D"]
+script = ExtResource("1_kq4vn")
+attack_damage = 65.0
+knockback = 250.0
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1, -20.25)
+shape = SubResource("RectangleShape2D_f7n2u")
+one_way_collision_margin = 1.2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3f8cp")
+region_enabled = true
+region_rect = Rect2(64.3345, 335.849, 31.6655, 64.0448)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 9)
+shape = SubResource("RectangleShape2D_alwkp")

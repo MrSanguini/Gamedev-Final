@@ -45,6 +45,8 @@ var movement_animations: AnimatedSprite2D = $movement_animations
 var action_animations: AnimatedSprite2D = $action_animations
 @onready
 var attack_animations: AnimatedSprite2D = $attack_animations
+@onready var game_manager: Node = %"Game Manager"
+
 
 @onready
 var movement_state_machine: Node = $movement_state_machine
@@ -74,7 +76,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	movement_state_machine.process_physics(delta)
 	action_state_machine.process_physics(delta)
-	print("\nCurrent State: ", action_state_machine.current_state.get_state_name())
+	#print("\nCurrent State: ", action_state_machine.current_state.get_state_name())
 	#print("\nCurrent acceleration: ", current_acceleration)
 	#print("\nCurrent deceleration: ", current_deceleration)
 	#print("\nCurrent horizontal velocity: ", velocity.x)
@@ -95,3 +97,6 @@ func get_current_action_state() -> String:
 	
 #func get_current_attack_state():
 	#return attack_state_machine.get_current_state_name()
+
+func _on_dead_dead() -> void:
+	game_manager.game_over()

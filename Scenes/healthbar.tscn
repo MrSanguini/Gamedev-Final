@@ -11,14 +11,26 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.901961, 0.643137, 0, 0.666667)
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8vfk"]
 bg_color = Color(0.251991, 0.680402, 0.620778, 1)
 border_color = Color(0.847059, 0.647059, 0, 0.627451)
 border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enrjp"]
 bg_color = Color(0.151276, 0.151276, 0.151276, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_right = 1.0
@@ -28,6 +40,10 @@ shadow_offset = Vector2(0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgpyq"]
 bg_color = Color(1, 0.181685, 0.327897, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="Healthbar" type="ProgressBar"]
 z_index = 1

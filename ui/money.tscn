@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://l1tyirn81gon"]
+
+[ext_resource type="Texture2D" uid="uid://dbx3uux3yk008" path="res://ui/Coin.png" id="6_lkdjs"]
+[ext_resource type="Script" path="res://scripts/money_bar.gd" id="7"]
+[ext_resource type="FontFile" uid="uid://j4agnopltlih" path="res://Fonts/Pixel Game.otf" id="8_5nyy1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkxbf"]
+bg_color = Color(0.103636, 0.151825, 0.179504, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="MoneyBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7")
+
+[node name="Panel5" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 25.0
+offset_right = 278.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hkxbf")
+
+[node name="Coin" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(78, 35)
+scale = Vector2(1.26562, 1.32813)
+texture = ExtResource("6_lkdjs")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 23.0
+offset_right = 271.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("8_5nyy1")
+theme_override_font_sizes/font_size = 16
+text = "0000"
+horizontal_alignment = 1
+vertical_alignment = 1

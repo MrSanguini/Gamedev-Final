@@ -10,9 +10,11 @@ func enter() -> void:
 func process_physics(delta: float) -> State:
 	if !parent.is_on_floor() and !finished:
 		animations.play("freefall")
+		finished = true
 	elif !finished:
 		animations.play("death", 0.5)
 		finished = true
 	
-	dead.emit()
+	if finished:
+		dead.emit()
 	return null

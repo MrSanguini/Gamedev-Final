@@ -920,9 +920,8 @@ sprite_frames = SubResource("SpriteFrames_u8vtb")
 animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 22)
-scale = Vector2(0.5, 1)
+position = Vector2(1, 21)
+scale = Vector2(0.6, 1.2)
 shape = SubResource("RectangleShape2D_knpx2")
 debug_color = Color(6.73831e-07, 0.599039, 0.705504, 0.42)
 
@@ -1137,3 +1136,5 @@ debug_color = Color(6.73831e-07, 0.599039, 0.705504, 0.42)
 
 [node name="Marker2D" type="Marker2D" parent="hitbox_component/hitbox"]
 position = Vector2(-2, 10)
+
+[connection signal="dead" from="action_state_machine/dead" to="." method="_on_dead_dead"]

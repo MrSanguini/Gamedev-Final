@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://x3ohn08ipvj1"]
+
+[ext_resource type="Script" path="res://Scripts/hazard.gd" id="1_3buxm"]
+[ext_resource type="Texture2D" uid="uid://djmlsj57bgqs3" path="res://Sprites/HeroandOpponents_v1/1 Enemy/PNG/idle-1.png" id="1_h1jrj"]
+[ext_resource type="Texture2D" uid="uid://rgbrupx8m46c" path="res://Sprites/HeroandOpponents_v1/1 Enemy/PNG/idle-2.png" id="2_0a01d"]
+[ext_resource type="Texture2D" uid="uid://f2q0y0r35eme" path="res://Sprites/HeroandOpponents_v1/1 Enemy/PNG/idle-3.png" id="3_2egb8"]
+[ext_resource type="Texture2D" uid="uid://dyuqosn2q4oxk" path="res://Sprites/HeroandOpponents_v1/1 Enemy/PNG/idle-4.png" id="4_yjofs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_br5qd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h1jrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0a01d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2egb8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yjofs")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jiqyc"]
+size = Vector2(20, 55.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rgc6x"]
+radius = 12.0
+height = 62.0
+
+[node name="Skeleton" type="CharacterBody2D"]
+script = ExtResource("1_3buxm")
+
+[node name="action_animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_br5qd")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0597489
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(19, 20.25)
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_jiqyc")
+debug_color = Color(6.73831e-07, 0.599039, 0.705504, 0.42)
+
+[node name="Marker2D" type="Marker2D" parent="CollisionShape2D"]
+position = Vector2(-2, 10)
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(19, 17)
+shape = SubResource("CapsuleShape2D_rgc6x")
+one_way_collision_margin = 1.2
