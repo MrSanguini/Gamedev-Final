@@ -15,12 +15,15 @@ var floating_state: State
 var dashing_state: State
 @export
 var dead_state: State
+@export
+var hurt_state: State
 
 func enter() -> void:
 	super()
 	set_collision(1, 18, 0, 0.5, 1.5)
 
 func process_input(event: InputEvent) -> State:
+	super(event)
 	if get_jump() and parent.jumps_remaining > 0:
 		parent.current_acceleration += parent.current_acceleration * 0.5
 		return jumping_state
@@ -56,6 +59,9 @@ func process_physics(delta: float) -> State:
 	if !parent.is_on_floor():
 		parent.jumps_remaining -= 1
 		return falling_state
+	
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func process_frame(delta: float) -> State:

@@ -1,25 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://btxqs1w5d0mjn"]
+[gd_scene load_steps=5 format=3 uid="uid://btxqs1w5d0mjn"]
 
 [ext_resource type="Texture2D" uid="uid://bntkkijb7vs21" path="res://Sprites/Wood-Camp/Tiles/Assets.png" id="1_2c7qv"]
 [ext_resource type="Script" path="res://Scripts/hazard.gd" id="1_btps7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1gxeb"]
-size = Vector2(30, 30)
+size = Vector2(31, 11)
 
-[node name="hazard" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7768"]
+size = Vector2(31, 21)
+
+[node name="spikeHazard" type="Node2D"]
 script = ExtResource("1_btps7")
+attack_damage = 50.0
+knockback = 300.0
 
 [node name="hitbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(-1, 1)
+position = Vector2(-0.5, -10.5)
 shape = SubResource("RectangleShape2D_1gxeb")
+one_way_collision_margin = 1.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2c7qv")
 region_enabled = true
 region_rect = Rect2(287.429, -0.66707, 33.9222, 32.4146)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_j7768")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

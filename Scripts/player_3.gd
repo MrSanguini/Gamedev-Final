@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export
 var base_health: float = 100
 @export
+var base_stamina: float = 20
+@export
 var base_speed : float = 150.0
 @export
 var base_acceleration : float = 1000.0
@@ -31,8 +33,9 @@ var jumps_remaining : int = max_jumps
 var is_alive : bool = true
 var can_move : bool = true
 var can_attack : bool = true
-var is_stuck: bool = false
 var can_dash : bool = true
+var just_hit: bool = false
+var knockback: float
 var dash_cooldown : float = 0.5
 var max_dash_cooldown : float = 0.5
 
@@ -52,14 +55,16 @@ var attack_state_machine: Node = $attack_state_machine
 @onready
 var player_move_component: Node = $player_move_component
 @onready
-var player_health_component: Node = $health_component
+var player_health_component: HealthComponent = $health_component
+@onready
+var player_hitbox_component: HitboxComponent = $hitbox_component
 @onready
 var player_collision: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
-	movement_state_machine.init(self, movement_animations, player_move_component, player_health_component, player_collision)
-	action_state_machine.init(self, action_animations, player_move_component, player_health_component, player_collision)
-	#attack_state_machine.init(self, attack_animations, player_move_component, player_health_component, player_collision)
+	movement_state_machine.init(self, movement_animations, player_move_component, player_health_component, player_hitbox_component, player_collision)
+	action_state_machine.init(self, action_animations, player_move_component, player_health_component, player_hitbox_component, player_collision)
+	#attack_state_machine.init(self, attack_animations, player_move_component, player_health_component, player_hitbox_component, player_collision)
 
 func _unhandled_input(event: InputEvent) -> void:
 	movement_state_machine.process_input(event)
@@ -70,10 +75,10 @@ func _physics_process(delta: float) -> void:
 	movement_state_machine.process_physics(delta)
 	action_state_machine.process_physics(delta)
 	print("\nCurrent State: ", action_state_machine.current_state.get_state_name())
-	print("\nCurrent acceleration: ", current_acceleration)
-	print("\nCurrent deceleration: ", current_deceleration)
-	print("\nCurrent horizontal velocity: ", velocity.x)
-	print("\nCurrent vertical velocity: ", velocity.y)
+	#print("\nCurrent acceleration: ", current_acceleration)
+	#print("\nCurrent deceleration: ", current_deceleration)
+	#print("\nCurrent horizontal velocity: ", velocity.x)
+	#print("\nCurrent vertical velocity: ", velocity.y)
 	#attack_state_machine.process_physics(delta)
 
 func _process(delta: float) -> void:

@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkwghxjuis8dy"]
+
+[ext_resource type="FontFile" uid="uid://j4agnopltlih" path="res://Fonts/Pixel Game.otf" id="1_8i0oe"]
+[ext_resource type="Script" path="res://Scripts/healthbar.gd" id="2_j7xxq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orix6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.901961, 0.643137, 0, 0.666667)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8vfk"]
+bg_color = Color(0.251991, 0.680402, 0.620778, 1)
+border_color = Color(0.847059, 0.647059, 0, 0.627451)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enrjp"]
+bg_color = Color(0.151276, 0.151276, 0.151276, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgpyq"]
+bg_color = Color(1, 0.181685, 0.327897, 1)
+
+[node name="Healthbar" type="ProgressBar"]
+z_index = 1
+offset_left = 28.0
+offset_top = 27.0
+offset_right = 268.0
+offset_bottom = 36.0
+theme_override_fonts/font = ExtResource("1_8i0oe")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_orix6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r8vfk")
+value = 60.0
+script = ExtResource("2_j7xxq")
+
+[node name="DamageBar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_enrjp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fgpyq")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

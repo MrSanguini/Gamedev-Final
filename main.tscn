@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c6vd2gfgndit4"]
+[gd_scene load_steps=20 format=4 uid="uid://c6vd2gfgndit4"]
 
 [ext_resource type="Texture2D" uid="uid://bi8qd7l013y5f" path="res://Sprites/Taiga Forest/Tiles.png" id="2_8xam7"]
 [ext_resource type="Texture2D" uid="uid://sibipvsihhul" path="res://Sprites/Taiga Forest/Background_0.png" id="3_0t36g"]
@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://cbv3hgifrqovm" path="res://Sounds/Music/yt1s.com - Stickerbush Symphony Restored to HD.mp3" id="11_gload"]
 [ext_resource type="Texture2D" uid="uid://bntkkijb7vs21" path="res://Sprites/Wood-Camp/Tiles/Assets.png" id="13_g55xy"]
 [ext_resource type="PackedScene" uid="uid://btxqs1w5d0mjn" path="res://Scenes/hazard.tscn" id="14_68otq"]
+[ext_resource type="PackedScene" uid="uid://co6gwih332e6r" path="res://Scenes/pause_menu.tscn" id="15_wm04t"]
+[ext_resource type="PackedScene" uid="uid://bglsqnkhf7sm3" path="res://Scenes/death_menu.tscn" id="16_12x7r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xecng"]
 texture = ExtResource("2_8xam7")
@@ -980,6 +982,8 @@ sources/1 = SubResource("TileSetAtlasSource_e81r6")
 
 [node name="Main" type="Node2D"]
 
+[node name="Game Manager" type="Node" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("9_qr2mk")]
 z_index = 1
 position = Vector2(320, -53)
@@ -991,20 +995,6 @@ limit_left = -10
 limit_bottom = 360
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
-
-[node name="Ambience1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_mjfwv")
-autoplay = true
-bus = &"Ambience1"
-
-[node name="Ambience2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_d0x2s")
-autoplay = true
-bus = &"Ambience2"
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_gload")
-bus = &"Music"
 
 [node name="Parallax background" type="Node2D" parent="."]
 position = Vector2(320, 180)
@@ -1102,3 +1092,27 @@ tile_set = SubResource("TileSet_2c377")
 
 [node name="hazard" parent="." instance=ExtResource("14_68otq")]
 position = Vector2(1081, 314)
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Ambience1" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("9_mjfwv")
+autoplay = true
+bus = &"Ambience1"
+
+[node name="Ambience2" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("10_d0x2s")
+autoplay = true
+bus = &"Ambience2"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("11_gload")
+bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pauseMenu" parent="CanvasLayer" instance=ExtResource("15_wm04t")]
+visible = false
+
+[node name="deathMenu" parent="CanvasLayer" instance=ExtResource("16_12x7r")]
+visible = false

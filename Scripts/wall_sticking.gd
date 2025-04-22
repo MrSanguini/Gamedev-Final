@@ -6,12 +6,14 @@ var wall_jumping_state: State
 var falling_state: State
 @export
 var dead_state: State
+@export
+var hurt_state: State
 
 var wall_normal
 
 func enter() -> void:
 	super()
-	parent.is_stuck = true
+	parent.can_move = false
 	set_collision(1, 18, 0, 0.5, 1.5)
 	parent.velocity.x = 0
 	parent.velocity.y = 0
@@ -27,14 +29,18 @@ func process_input(event: InputEvent) -> State:
 	return null
 	
 func process_physics(delta: float) -> State:
+	super(delta)
 	animations.flip_h = wall_normal.x < 0
 	parent.velocity.y = 0
 	if !parent.is_on_wall_only():
 		return falling_state
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func exit() -> void:
-	parent.is_stuck = false
+	parent.can_move = true
 	parent.gravity_mod = 1
 	
 func process_frame(delta: float) -> State:

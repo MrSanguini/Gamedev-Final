@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=3 uid="uid://00waklg125o8"]
+[gd_scene load_steps=147 format=3 uid="uid://00waklg125o8"]
 
 [ext_resource type="Texture2D" uid="uid://c0eixukv2xge0" path="res://Sprites/FULL_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png" id="1_2ci0s"]
 [ext_resource type="Script" path="res://Scripts/player_3.gd" id="1_355d3"]
@@ -33,10 +33,7 @@
 [ext_resource type="Script" path="res://Scripts/hurt.gd" id="32_qkt1k"]
 [ext_resource type="Script" path="res://Scripts/dead.gd" id="32_rj6ky"]
 [ext_resource type="PackedScene" uid="uid://cbn1epn5k1kka" path="res://Scenes/health_component.tscn" id="33_gedxy"]
-[ext_resource type="Script" path="res://Scripts/stamina_component.gd" id="34_che53"]
 [ext_resource type="PackedScene" uid="uid://c1uattvpsm07y" path="res://Scenes/hitbox_component.tscn" id="34_v1pqm"]
-[ext_resource type="PackedScene" uid="uid://dkwghxjuis8dy" path="res://Scenes/healthbar.tscn" id="36_1nwku"]
-[ext_resource type="Texture2D" uid="uid://cs5cr0bxflavg" path="res://Sprites/Extras/pixel-heart-2779422_1280.webp" id="37_gkl54"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vjmqq"]
 atlas = ExtResource("6_mt616")
@@ -906,15 +903,6 @@ script = ExtResource("1_355d3")
 jump_velocity = -450.0
 max_jumps = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("36_1nwku")]
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(15, 32)
-scale = Vector2(0.0124999, 0.0128905)
-texture = ExtResource("37_gkl54")
-
 [node name="action_animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u8vtb")
 animation = &"death"
@@ -1046,7 +1034,7 @@ standing_state = NodePath("../standing")
 landing_state = NodePath("../landing")
 wall_sticking_state = NodePath("../wall sticking")
 dead_state = NodePath("../dead")
-power = 300.0
+power = 250.0
 animation_name = "dash"
 state_name = "Dashing"
 
@@ -1118,11 +1106,7 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_knlrv")
 animation = &"turn"
 
-[node name="health_component" parent="." node_paths=PackedStringArray("healthbar") instance=ExtResource("33_gedxy")]
-healthbar = NodePath("../CanvasLayer/Healthbar")
-
-[node name="stamina_component" parent="." instance=ExtResource("33_gedxy")]
-script = ExtResource("34_che53")
+[node name="health_component" parent="." instance=ExtResource("33_gedxy")]
 
 [node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("34_v1pqm")]
 collision_layer = 2

@@ -20,6 +20,9 @@ var wall_sticking_state: State
 @export
 var dead_state: State
 @export
+var hurt_state: State
+
+@export
 var wall_stick_time: float = 0.1
 var wall_stick_timer: float = wall_stick_time
 
@@ -53,6 +56,9 @@ func process_physics(delta: float) -> State:
 				return wall_sticking_state
 		else:
 			wall_stick_timer = wall_stick_time
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func exit() -> void:

@@ -12,7 +12,8 @@ var speed_scale: float = 1
 
 var animations: AnimatedSprite2D
 var move_component: Node
-var health_component: Node
+var health_component: HealthComponent
+var hitbox_component: HitboxComponent
 var parent: CharacterBody2D
 var collision: CollisionShape2D
 

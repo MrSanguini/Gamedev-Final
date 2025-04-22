@@ -17,13 +17,11 @@ func process_physics(delta: float) -> State:
 			parent.gravity_mod = 1
 	parent.velocity.y += parent.gravity * delta * parent.gravity_mod
 	
-	if parent.is_alive and parent.can_move and !parent.is_stuck:
+	if parent.is_alive and parent.can_move:
 		if get_movement_input() != 0:
 			# Set direction faced and accelerate
 			parent.turn = get_movement_input()
 			parent.velocity.x = move_toward(parent.velocity.x, get_movement_input() * 999, parent.current_acceleration)
-	elif parent.is_alive and parent.can_move and parent.is_stuck:
-		pass
 	
 	# Apply decelration at all times
 	parent.velocity.x = move_toward(parent.velocity.x, 0, parent.current_deceleration)

@@ -37,6 +37,7 @@ func enter() -> void:
 	parent.velocity.y = 0
 	parent.gravity_mod = 0.3
 	dash_timer = dash_time
+	hitbox_component.iframe = true
 	parent.dash_cooldown = parent.max_dash_cooldown
 	
 func process_input(event: InputEvent) -> State:
@@ -55,6 +56,7 @@ func process_physics(delta: float) -> State:
 
 func exit() -> void:
 	parent.gravity_mod = 1
+	hitbox_component.iframe = false
 	if parent.is_on_floor():
 		parent.velocity.x -= parent.velocity.x * 0.5
 		parent.jumps_remaining = parent.max_jumps

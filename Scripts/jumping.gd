@@ -18,6 +18,9 @@ var wall_sticking_state: State
 @export
 var dead_state: State
 @export
+var hurt_state: State
+
+@export
 var wall_stick_time: float = 0.3
 var wall_stick_timer: float = wall_stick_time
 
@@ -28,6 +31,7 @@ func enter() -> void:
 	parent.velocity.y = parent.jump_velocity
 
 func process_input(event: InputEvent) -> State:
+	super(event)
 	if get_dash() and parent.can_dash:
 		return dashing_state
 	return null
@@ -48,6 +52,9 @@ func process_physics(delta: float) -> State:
 				return wall_sticking_state
 		else:
 			wall_stick_timer = wall_stick_time
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func exit() -> void:

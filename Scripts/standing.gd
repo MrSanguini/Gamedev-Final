@@ -15,12 +15,15 @@ var floating_state: State
 var dashing_state: State
 @export
 var dead_state: State
+@export
+var hurt_state: State
 
 func enter() -> void:
 	super()
 	set_collision(1, 18, 0, 0.5, 1.5)
 
 func process_input(event: InputEvent) -> State:
+	super(event)
 	if get_jump() and parent.jumps_remaining > 0:
 		return jumping_state
 	if get_movement_input() != 0.0:
@@ -41,9 +44,12 @@ func process_physics(delta: float) -> State:
 	if !parent.is_on_floor():
 		parent.jumps_remaining -= 1
 		return falling_state
-	#If moving, but no player input was made, slide as if resisting the motion
+	#If moving
 	if absf(parent.velocity.x) > 0:
 		return walking_state
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 	
 func process_frame(delta: float) -> State:

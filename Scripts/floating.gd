@@ -20,6 +20,9 @@ var wall_sticking_state: State
 @export
 var dead_state: State
 @export
+var hurt_state: State
+
+@export
 var wall_stick_time: float = 0.2
 var wall_stick_timer: float = wall_stick_time
 
@@ -28,6 +31,7 @@ func enter() -> void:
 	set_collision(1, 18, 0, 0.5, 1.5)
 
 func process_input(event: InputEvent) -> State:
+	super(event)
 	if get_jump() and parent.jumps_remaining > 0:
 		return jumping_state
 		
@@ -53,6 +57,9 @@ func process_physics(delta: float) -> State:
 				return wall_sticking_state
 		else:
 			wall_stick_timer = wall_stick_time
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func exit() -> void:

@@ -9,6 +9,9 @@ var falling_state: State
 @export
 var dead_state: State
 @export
+var hurt_state: State
+
+@export
 var jump_force_mod: float = 0.7
 
 func enter() -> void:
@@ -39,6 +42,9 @@ func process_physics(delta: float) -> State:
 	# Stick to walls
 	if parent.is_on_wall_only():
 		return wall_sticking_state
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 	
 func process_frame(delta: float) -> State:

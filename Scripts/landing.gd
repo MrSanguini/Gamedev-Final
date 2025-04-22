@@ -17,6 +17,8 @@ var floating_state: State
 var dashing_state: State
 @export
 var dead_state: State
+@export
+var hurt_state: State
 
 @export
 var landing_time : float = 0.1
@@ -34,6 +36,7 @@ func enter() -> void:
 	landing_timer = landing_time
 
 func process_input(event: InputEvent) -> State:
+	super(event)
 	if get_jump() and parent.jumps_remaining > 0:
 		return jumping_state
 	if get_dash() and parent.can_dash:
@@ -58,6 +61,9 @@ func process_physics(delta: float) -> State:
 	if !parent.is_on_floor():
 		parent.jumps_remaining -= 1
 		return falling_state
+		
+	if parent.just_hit:
+		return hurt_state
 	return null
 
 func process_frame(delta: float) -> State:

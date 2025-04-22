@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=3 uid="uid://bglsqnkhf7sm3"]
+
+[ext_resource type="Script" path="res://Scenes/death_menu.gd" id="1_8dxwe"]
+[ext_resource type="Shader" path="res://Shaders/pause_menu.gdshader" id="2_d3paw"]
+[ext_resource type="FontFile" uid="uid://j4agnopltlih" path="res://Fonts/Pixel Game.otf" id="3_jthai"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t17ih"]
+shader = ExtResource("2_d3paw")
+shader_parameter/lod = 0.0
+
+[sub_resource type="Animation" id="Animation_n3ovj"]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.701777, 0.122648, 0.153251, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aef5c"]
+resource_name = "blur"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.376471, 0.376471, 0.376471, 0), Color(0.336608, 0.336608, 0.336608, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgt5u"]
+_data = {
+"RESET": SubResource("Animation_n3ovj"),
+"blur": SubResource("Animation_aef5c")
+}
+
+[node name="Control" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8dxwe")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_t17ih")
+offset_right = 641.0
+offset_bottom = 360.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lgt5u")
+}
+
+[node name="quitButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 69.0
+offset_top = 213.0
+offset_right = 274.0
+offset_bottom = 262.0
+size_flags_vertical = 6
+size_flags_stretch_ratio = 2.0
+tooltip_text = "Return to the town"
+theme_override_colors/font_hover_pressed_color = Color(0.856205, 0.324382, 0.164645, 1)
+theme_override_colors/font_hover_color = Color(0.964372, 0.482193, 0.344862, 1)
+theme_override_fonts/font = ExtResource("3_jthai")
+theme_override_font_sizes/font_size = 40
+text = "QUIT TO TOWN"
+
+[node name="quitButton2" type="Button" parent="."]
+layout_mode = 2
+offset_left = 341.0
+offset_top = 216.0
+offset_right = 558.0
+offset_bottom = 258.0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+tooltip_text = "Return to the town"
+theme_override_colors/font_hover_pressed_color = Color(0.856205, 0.324382, 0.164645, 1)
+theme_override_colors/font_hover_color = Color(0.964372, 0.482193, 0.344862, 1)
+theme_override_fonts/font = ExtResource("3_jthai")
+theme_override_font_sizes/font_size = 32
+text = "Quit to Main menu"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 19.0
+offset_right = 445.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("3_jthai")
+theme_override_font_sizes/font_size = 60
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="quitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="quitButton2" to="." method="_on_quit_button_2_pressed"]
